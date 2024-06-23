@@ -1,0 +1,35 @@
+<html>
+<head>
+
+<link rel="modulepreload" href="/Kathareuouspam-d1f0815d34b5a869.js" crossorigin=anonymous integrity="sha384-fD/cP76QfmYeUQZgJCO0TvN+11oLt5iaFFWg952ciB6M0T3rOu2ml4QPXgNRKnfv">
+<link rel="preload" href="/Kathareuouspam-d1f0815d34b5a869_bg.wasm" crossorigin=anonymous integrity="sha384-MtiVDXEbSKdrRQBkZV+tAwDysjViH1bJv+c2nYTNV2J6oPFFimXTo+Nexs7LhSr9" as="fetch" type="application/wasm"></head>
+
+<body>
+    <!-- The WASM code will resize the canvas dynamically -->
+    <!-- the id is hardcoded in main.rs . so, make sure both match. -->
+    <canvas id="the_canvas_id" width="1000" height="500"></canvas>
+
+    <!--Register Service Worker. this will cache the wasm / js scripts for offline use (for PWA functionality). -->
+    <!-- Force refresh (Ctrl + F5) to load the latest files instead of cached files  -->
+    <script>
+        // We disable caching during development so that we always view the latest version.
+        if ('serviceWorker' in navigator && window.location.hash !== "#dev") {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
+
+<script type="module" nonce="am5HoTqskkMDFKJbd4HWJQ==">
+import init, * as bindings from '/Kathareuouspam-d1f0815d34b5a869.js';
+const wasm = await init('/Kathareuouspam-d1f0815d34b5a869_bg.wasm');
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script></body>
+
+</html>
